@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kidney Disease Prediction</title>
+    <style>
+      /* Basic styling for the form and container */
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .result {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Kidney Disease Prediction App</h2>
+      <form id="predictionForm">
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" required />
+        </div>
+        <div class="form-group">
+          <label for="blood_pressure">Blood Pressure:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="blood_pressure"
+            name="blood_pressure"
+            required
+          />
+        </div>
+        <!-- Add other relevant input fields here -->
+
+        <button type="button" onclick="predict()">Predict</button>
+      </form>
+      <div class="result" id="predictionResult"></div>
+    </div>
+
+    <script>
+      // JavaScript function to handle form submission and display prediction result
+      function predict() {
+        const age = parseFloat(document.getElementById("age").value);
+        const bloodPressure = parseFloat(
+          document.getElementById("blood_pressure").value
+        );
+        // Add other input fields here
+
+        // Create a data object with user inputs
+        const data = {
+          age: age,
+          blood_pressure: bloodPressure,
+          // Add other input fields here
+        };
+
+        // Send the data as JSON to the Flask app using fetch API
+        fetch("/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((prediction) => {
+            // Display prediction result on the web page
+            const predictionResult =
+              document.getElementById("predictionResult");
+            if (prediction.prediction === 0) {
+              predictionResult.textContent =
+                "Prediction: Kidney Disease Detected";
+            } else {
+              predictionResult.textContent =
+                "Prediction: No Kidney Disease Detected";
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
