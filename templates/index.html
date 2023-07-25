@@ -44,18 +44,12 @@
         border-radius: 5px;
         cursor: pointer;
       }
-
-      .result {
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 20px;
-      }
     </style>
   </head>
   <body>
     <div class="container">
       <h2>Kidney Disease Prediction App</h2>
-      <form id="predictionForm">
+      <form action="/predict" method="post">
         <div class="form-group">
           <label for="age">Age:</label>
           <input type="number" id="age" name="age" required />
@@ -70,54 +64,190 @@
             required
           />
         </div>
-        <!-- Add other relevant input fields here -->
-
-        <button type="button" onclick="predict()">Predict</button>
+        <div class="form-group">
+          <label for="specific_gravity">Specific Gravity:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="specific_gravity"
+            name="specific_gravity"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="albumin">Albumin:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="albumin"
+            name="albumin"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="sugar">Sugar:</label>
+          <input type="number" step="0.01" id="sugar" name="sugar" required />
+        </div>
+        <div class="form-group">
+          <label for="red_blood_cells">Red Blood Cells:</label>
+          <select id="red_blood_cells" name="red_blood_cells" required>
+            <option value="0">Abnormal</option>
+            <option value="1">Normal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pus_cell">Pus Cell:</label>
+          <select id="pus_cell" name="pus_cell" required>
+            <option value="0">Abnormal</option>
+            <option value="1">Normal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pus_cell_clumps">Pus Cell Clumps:</label>
+          <select id="pus_cell_clumps" name="pus_cell_clumps" required>
+            <option value="0">Not Present</option>
+            <option value="1">Present</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bacteria">Bacteria:</label>
+          <select id="bacteria" name="bacteria" required>
+            <option value="0">Not Present</option>
+            <option value="1">Present</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="blood_glucose_random">Blood Glucose Random:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="blood_glucose_random"
+            name="blood_glucose_random"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="blood_urea">Blood Urea:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="blood_urea"
+            name="blood_urea"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="serum_creatinine">Serum Creatinine:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="serum_creatinine"
+            name="serum_creatinine"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="sodium">Sodium:</label>
+          <input type="number" step="0.01" id="sodium" name="sodium" required />
+        </div>
+        <div class="form-group">
+          <label for="potassium">Potassium:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="potassium"
+            name="potassium"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="haemoglobin">Haemoglobin:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="haemoglobin"
+            name="haemoglobin"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="packed_cell_volume">Packed Cell Volume:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="packed_cell_volume"
+            name="packed_cell_volume"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="white_blood_cell_count">White Blood Cell Count:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="white_blood_cell_count"
+            name="white_blood_cell_count"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="red_blood_cell_count">Red Blood Cell Count:</label>
+          <input
+            type="number"
+            step="0.01"
+            id="red_blood_cell_count"
+            name="red_blood_cell_count"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="hypertension">Hypertension:</label>
+          <select id="hypertension" name="hypertension" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="diabetes_mellitus">Diabetes Mellitus:</label>
+          <select id="diabetes_mellitus" name="diabetes_mellitus" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="coronary_artery_disease">Coronary Artery Disease:</label>
+          <select
+            id="coronary_artery_disease"
+            name="coronary_artery_disease"
+            required
+          >
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="appetite">Appetite:</label>
+          <select id="appetite" name="appetite" required>
+            <option value="0">Poor</option>
+            <option value="1">Good</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="peda_edema">Peda Edema:</label>
+          <select id="peda_edema" name="peda_edema" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="aanemia">Aanemia:</label>
+          <select id="aanemia" name="aanemia" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <button type="submit">Predict</button>
       </form>
-      <div class="result" id="predictionResult"></div>
     </div>
-
-    <script>
-      // JavaScript function to handle form submission and display prediction result
-      function predict() {
-        const age = parseFloat(document.getElementById("age").value);
-        const bloodPressure = parseFloat(
-          document.getElementById("blood_pressure").value
-        );
-        // Add other input fields here
-
-        // Create a data object with user inputs
-        const data = {
-          age: age,
-          blood_pressure: bloodPressure,
-          // Add other input fields here
-        };
-
-        // Send the data as JSON to the Flask app using fetch API
-        fetch("/predict", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => response.json())
-          .then((prediction) => {
-            // Display prediction result on the web page
-            const predictionResult =
-              document.getElementById("predictionResult");
-            if (prediction.prediction === 0) {
-              predictionResult.textContent =
-                "Prediction: Kidney Disease Detected";
-            } else {
-              predictionResult.textContent =
-                "Prediction: No Kidney Disease Detected";
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
-    </script>
   </body>
 </html>
