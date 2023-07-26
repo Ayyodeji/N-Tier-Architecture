@@ -4,8 +4,8 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Load the trained KNN model
-knn_model = joblib.load('knn_model.pkl')
+# Load the trained model
+knn_model = joblib.load('./models/rf_model.pkl')
 
 @app.route('/')
 def home():
